@@ -13,7 +13,7 @@ public class ConsoleApp {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[]{"application.xml"});
         BookPanel bookPanel = applicationContext.getBean("bookPanel", BookPanel.class);
-        CustomerPanel customerPanel = applicationContext.getBean("customerPanel", CustomerPanel.class);
+        CustomerPanel customerPanel = applicationContext.getBean("customerPanel",CustomerPanel.class);
 
         addBooksToLibrary(bookPanel);
         addCustomers(customerPanel);
@@ -22,9 +22,9 @@ public class ConsoleApp {
         bookPanel.getBooksList();
 
         //Lend books ==============================================================
-        bookPanel.lendBook(14L, 1L);
-        bookPanel.lendBook(14L, 4L);
-        bookPanel.lendBook(15L, 7L);
+        bookPanel.lendBook(14L,1L);
+        bookPanel.lendBook(14L,4L);
+        bookPanel.lendBook(15L,7L);
 
         bookPanel.getBooksList();
 
@@ -34,7 +34,7 @@ public class ConsoleApp {
         criteria.setYear("2014");
 
         List<BookDto> books = bookPanel.searchBooks(criteria);
-        books.stream().map(book -> book.getTitle() + " " + book.getAuthor() + " " + book.getYear()).forEach(System.out::println);
+        books.stream().map(book ->  book.getTitle()+" "+book.getAuthor()+" "+book.getYear() ).forEach(System.out::println);
 
         //Remove Books ==============================================================
         bookPanel.removeBook(2L);
@@ -47,7 +47,7 @@ public class ConsoleApp {
     }
 
     
-    private static void addBooksToLibrary(BookPanel bookPanel) {
+    private static void addBooksToLibrary(BookPanel bookPanel){
         bookPanel.createNewBook(new BookDto("Lotr", "JRRTolkien", "2010"));
         bookPanel.createNewBook(new BookDto("Lotr", "JRRTolkien", "2010"));
         bookPanel.createNewBook(new BookDto("Lotr", "JRRTolkien", "2017"));
@@ -63,7 +63,7 @@ public class ConsoleApp {
         bookPanel.createNewBook(new BookDto("Wizard's First Rule", "Terry Goodkind", "2014"));
     }
 
-    private static void addCustomers(CustomerPanel customerPanel) {
+    private static void addCustomers(CustomerPanel customerPanel){
         customerPanel.createNewCustomer(new CustomerDto("Tuco Ramirez"));
         customerPanel.createNewCustomer(new CustomerDto("Thomas Anderson"));
     }
