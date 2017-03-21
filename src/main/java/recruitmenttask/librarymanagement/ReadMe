@@ -1,0 +1,18 @@
+Dzień dobry,
+
+dziękuje, że poświęca Pani/Pan czas na recenzję kodu.
+Kod  został napisany w Intellij IDEA.
+
+Aplikacja konsolowa znajduje się w pakiecie: recruitmenttask.librarymanagement.application
+
+W aplikacji konsolowej przedstawiłem wszystkie cechy programu. Uruchamia się ją poprzez uruchomienie metody main.
+
+Mam również uwagę odnośnie testów. Uruchomienie wszystkich testów jednocześnie powoduje, że nie są zdane 3 testy:
+RemoveBook, LendBook, oraz AddCustomer. Jeśli uruchomiamy testy pojedynczo wszystkie są zdane.
+Za względu na niewystarczającą ilość czasu wynikającą z pracy zawodowej, nie znalazłem rozwiązania jak pozbyć się tego błędu.
+Mam nadzieję, że nie wpłynie to znacząco negatywnie na ocenę programu.
+
+Pozdrawiam
+
+Bartosz Paszkowski
+

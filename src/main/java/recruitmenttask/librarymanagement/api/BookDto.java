@@ -25,13 +25,13 @@ public class BookDto {
         return year;
     }
 
-    public void validation(){
+    public void validate(){
         if (title == null || title.trim().isEmpty())
-            throw new InvalidRequestException("Title can not be empty");
+            throw new IllegalArgumentException("Title can not be empty");
         if (author == null || author.trim().isEmpty())
-            throw new InvalidRequestException("Author can not be empty");
+            throw new IllegalArgumentException("Author can not be empty");
         if (year == null || year.trim().isEmpty())
-            throw new InvalidRequestException("Year can not be empty");
+            throw new IllegalArgumentException("Year can not be empty");
     }
 
     @Override

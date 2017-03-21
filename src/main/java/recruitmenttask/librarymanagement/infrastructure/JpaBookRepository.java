@@ -16,11 +16,6 @@ public class JpaBookRepository implements BookRepository {
     private EntityManager entityManager;
 
     @Override
-    public void save(Book book) {
-        entityManager.persist(book);
-    }
-
-    @Override
     public Book findById(Long id) {
         List<Book> books = entityManager.createQuery("FROM Book b WHERE b.id =:id", Book.class)
                 .setParameter("id", id).getResultList();
@@ -31,4 +26,5 @@ public class JpaBookRepository implements BookRepository {
     public void remove(Book book) {
         entityManager.remove(book);
     }
+
 }

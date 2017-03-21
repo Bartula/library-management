@@ -12,8 +12,8 @@ public class CustomerDto {
         return name;
     }
 
-    public void validation(){
+    public void validate(){
         if (name == null || name.trim().isEmpty())
-            throw new InvalidRequestException("Customer name can not be empty");
+            throw new IllegalArgumentException("Customer name can not be empty");
     }
 }

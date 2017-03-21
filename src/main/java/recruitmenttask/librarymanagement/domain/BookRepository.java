@@ -1,9 +1,9 @@
 package recruitmenttask.librarymanagement.domain;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public interface BookRepository {
-    void save(Book book);
-
     Book findById(Long id);
 
     void remove(Book book);

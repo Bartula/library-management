@@ -16,13 +16,13 @@ public class CustomerPanel {
 
     @Transactional
     public void createNewCustomer(CustomerDto customerDto) {
-        customerDto.validation();
+        customerDto.validate();
         Customer customer = customerRepository.load(customerDto.getName());
         if (customer == null) {
             customer = new Customer(customerDto.getName());
             customerRepository.save(customer);
         }else
-            throw new InvalidRequestException("Customer already exist");
+            throw new IllegalArgumentException("Customer already exist");
     }
 
 

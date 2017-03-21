@@ -21,7 +21,6 @@ public class Customer {
 
     public Customer(String name) {
         this.name = name;
-        //this.book = new LinkedList<>();
     }
 
     public String getName() {

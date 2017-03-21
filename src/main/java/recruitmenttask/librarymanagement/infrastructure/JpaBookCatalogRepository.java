@@ -1,10 +1,10 @@
 package recruitmenttask.librarymanagement.infrastructure;
 
 import org.springframework.stereotype.Repository;
-import recruitmenttask.librarymanagement.api.BookDto;
+import recruitmenttask.librarymanagement.api.BookDao;
 import recruitmenttask.librarymanagement.api.BookSearchCriteria;
 import recruitmenttask.librarymanagement.domain.Book;
-import recruitmenttask.librarymanagement.domain.BookCatalog;
+import recruitmenttask.librarymanagement.api.BookCatalog;
 import recruitmenttask.librarymanagement.domain.Book_;
 
 import javax.persistence.EntityManager;
@@ -16,6 +16,7 @@ import javax.persistence.criteria.Root;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -27,20 +28,17 @@ public class JpaBookCatalogRepository implements BookCatalog {
     private EntityManager entityManager;
 
     @Override
-    public List<Book> listAllBooks() {
-        return entityManager.createQuery("FROM Book b", Book.class).getResultList();
+    public List<BookDao> listAllBooks() {
+        List<Book> books = entityManager.createQuery("FROM Book b", Book.class).getResultList();
+        return books.stream().map(book -> new BookDao(book.getTitle(), book.getAuthor(), book.getYear(),
+                book.getStatus(), book.getCustomer())).collect(Collectors.toList());
     }
 
     @Override
-    public Book updateBook(Book book) {
-        return entityManager.merge(book);
-    }
-
-    @Override
-    public List<BookDto> searchBooks(BookSearchCriteria criteria) {
+    public List<BookDao> searchBooks(BookSearchCriteria criteria) {
         checkNotNull(criteria);
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<BookDto> query = builder.createQuery(BookDto.class);
+        CriteriaQuery<BookDao> query = builder.createQuery(BookDao.class);
         Root<Book> root = query.from(Book.class);
 
         selectBookDto(builder, query, root);
@@ -49,15 +47,15 @@ public class JpaBookCatalogRepository implements BookCatalog {
         return entityManager.createQuery(query).getResultList();
     }
 
-    private void selectBookDto(CriteriaBuilder builder, CriteriaQuery<BookDto> query, Root<Book> root) {
-        query.select(builder.construct(BookDto.class,
+    private void selectBookDto(CriteriaBuilder builder, CriteriaQuery<BookDao> query, Root<Book> root) {
+        query.select(builder.construct(BookDao.class,
                 root.get(Book_.title),
                 root.get(Book_.author),
                 root.get(Book_.year)
         ));
     }
 
-    private void applyCriteria(BookSearchCriteria criteria, CriteriaBuilder builder, CriteriaQuery<BookDto> query, Root<Book> root) {
+    private void applyCriteria(BookSearchCriteria criteria, CriteriaBuilder builder, CriteriaQuery<BookDao> query, Root<Book> root) {
         Collection<Predicate> predicates = new HashSet<>();
         ifTitleIsDefined(criteria, builder, root, predicates);
         ifAuthorIsDefined(criteria, builder, root, predicates);
