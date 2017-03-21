@@ -3,7 +3,7 @@ Dzień dobry,
 dziękuje, że poświęca Pani/Pan czas na recenzję kodu.
 Kod  został napisany w Intellij IDEA.
 
-Aplikacja konsolowa znajduje się w pakiecie: recruitmenttask.librarymanagement.application
+Aplikacja konsolowa znajduje się w pakiecie: src.main.java.recruitmenttask.librarymanagement.application
 
 W aplikacji konsolowej przedstawiłem wszystkie cechy programu. Uruchamia się ją poprzez uruchomienie metody main.
 
